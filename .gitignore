@@ -1,0 +1,7 @@
+**/__pycache__
+**/*egg-info
+**/build
+**/dist
+**/*.drawio.bkp
+**/*.drawio.dtmp
+**/.DS_Store
