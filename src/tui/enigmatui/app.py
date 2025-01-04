@@ -4,13 +4,15 @@ from textual.widgets import Header, Footer, Button, Select, Static, Header
 from textual.events import Key
 from enigmatui.screens.splash import SplashScreen
 from enigmatui.screens.main import MainScreen
+from enigmatui.screens.configure import ConfigureScreen
+from enigmatui.screens.encrypt import EncryptScreen
 
 
 class EnigmaApp(App[str]):
    
     CSS_PATH = "css/styles.css"
     TITLE = "Enigma TUI"
-    SUB_TITLE = "A Terminal User Interface for Enigma machines by Denis Maggiorotto"
+    SUB_TITLE = "A Terminal User Interface for Enigma machines, by Denis Maggiorotto"
 
     def compose(self) -> ComposeResult:
         yield Header()

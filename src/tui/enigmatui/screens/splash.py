@@ -13,7 +13,7 @@ class SplashScreen(Screen):
 
     def compose(self) -> ComposeResult:
         yield Header()
-        yield Static(" Welcome! ", id="title")
+        yield Static(" Welcome! ", id="welcome")
         yield Static(SPLASH_TEXT, id="splash-text")
         yield Static("Press enter to continue [blink]_[/]", id="any-key")
         yield Footer()

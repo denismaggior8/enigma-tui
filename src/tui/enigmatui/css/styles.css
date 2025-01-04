@@ -8,7 +8,7 @@ SplashScreen > Static {
     width: 70;
 }
 
-SplashScreen #title {
+SplashScreen #welcome {
     content-align-horizontal: center;
     text-style: reverse;
     margin-bottom: 3;
@@ -18,3 +18,17 @@ SplashScreen #any-key {
     margin-top: 3;
     content-align-horizontal: center;
 }
+
+/* Main screen */
+MainScreen {
+    background: #000000;
+    color: #ffffff;
+    align: center middle;
+}
+
+MainScreen > Static {
+    width: 30;
+}
+
+
+
