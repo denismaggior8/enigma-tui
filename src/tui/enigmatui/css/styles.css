@@ -4,7 +4,11 @@ SplashScreen {
     color: #ffffff;
     align: center middle;
 }
-SplashScreen > Static {
+SplashScreen > Static #splash-text {
+    width: 70;
+}
+
+SplashScreen > Static #welcome {
     width: 70;
 }
 
@@ -14,8 +18,19 @@ SplashScreen #welcome {
     margin-bottom: 3;
 }
 
+SplashScreen #enigma-diagram {
+    content-align-horizontal: center;
+    margin-bottom: 3;
+}
+
 SplashScreen #any-key {
     margin-top: 3;
+    content-align-horizontal: center;
+}
+
+SplashScreen #splash-text {
+    margin-top: 3;
+    text-align: center;
     content-align-horizontal: center;
 }
 
