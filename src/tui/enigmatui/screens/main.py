@@ -1,6 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.screen import Screen
-from textual.widgets import Static, Header
+from textual.widgets import Static, Header, Footer
 
 class MainScreen(Screen):
     def compose(self) -> ComposeResult:
