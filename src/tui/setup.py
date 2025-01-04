@@ -17,7 +17,15 @@ setup(
     packages=find_packages(
         # All keyword arguments below are optional:
         where='.',  # '.' by default
-        include=['enigmatui'],  # ['*'] by default
     ),
+    entry_points={
+        "console_scripts": [
+            "enigmatui = enigmatui.__main__:main",  # 
+        ],
+    },
+    install_requires=[
+        "textual",
+        "enigmapython"
+    ],
     description="Enigma TUI is a Terminal User Interface for Enigma machines, allowing you to simulate different Enigma machine models from the terminal"
 )

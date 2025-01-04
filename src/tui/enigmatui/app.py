@@ -1,31 +1,27 @@
-from enigmatui.screens.configuration import ConfigurationScreen
-from enigmatui.screens.encryption import EncryptionScreen
-from textual import App, Button, ComposeResult, Footer, Header, Vertical
-class EnigmaApp(App):
-    """Un'applicazione per simulare la macchina Enigma con sezioni separate."""
+from textual.app import App, ComposeResult
+from textual.containers import Vertical, Horizontal
+from textual.widgets import Header, Footer, Button, Select, Static, Header
+from textual.events import Key
+from enigmatui.screens.splash import SplashScreen
+from enigmatui.screens.main import MainScreen
 
-    CSS = """
-    Screen {
-        align: center middle;
-    }
-    Button {
-        margin: 1;
-    }
-    """
+
+class EnigmaApp(App[str]):
+   
+    CSS_PATH = "css/styles.css"
+    TITLE = "Enigma TUI"
+    SUB_TITLE = "A Terminal User Interface for Enigma machines"
 
     def compose(self) -> ComposeResult:
-        yield Header(title="Enigma Machine Simulator")
-        yield Vertical(
-            Button("Configure Machine", id="configure_button"),
-            Button("Encrypt Message", id="encrypt_button"),
-            id="menu",
-        )
-        yield Footer()
+        yield Header()
 
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        """Gestisce la navigazione tra le sezioni."""
-        button_id = event.button.id
-        if button_id == "configure_button":
-            self.push_screen(ConfigurationScreen())
-        elif button_id == "encrypt_button":
-            self.push_screen(EncryptionScreen())
+    def on_mount(self):
+        self.install_screen(SplashScreen(), name="splash")
+        self.install_screen(MainScreen(), name="main")
+        self.push_screen("main") 
+        self.push_screen("splash") 
+
+   
+        
+
+    

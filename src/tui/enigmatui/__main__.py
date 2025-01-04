@@ -1,5 +1,5 @@
 from enigmatui.app import EnigmaApp
-
-if __name__ == "__main__":
+    
+def main():
     app = EnigmaApp()
-    app.run()
+    app.run() 
