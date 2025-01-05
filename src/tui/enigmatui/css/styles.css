@@ -21,6 +21,7 @@ SplashScreen #welcome {
 SplashScreen #enigma-diagram {
     content-align-horizontal: center;
     margin-bottom: 3;
+    margin-top: 3;
 }
 
 SplashScreen #any-key {
@@ -45,5 +46,18 @@ MainScreen > Static {
     width: 30;
 }
 
+/* Configure screen */
 
+ConfigureScreen {
+    background: #000000;
+    color: #ffffff;
+    
+}
 
+ConfigureScreen > Static {
+    margin-left: 2;
+}
+
+ConfigurationScreen Select {
+    margin-bottom: 2;
+}
