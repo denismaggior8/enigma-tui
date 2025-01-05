@@ -2,3 +2,4 @@ enigmapython
 textual
 textual-dev
 pytest-watch
+enigmatui

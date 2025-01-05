@@ -10,7 +10,7 @@ class MainScreen(Screen):
     BINDINGS = [("c", "go_to_configure", "Configure"), ("e", "go_to_encrypt", "De/Encrypt")]
 
     def action_go_to_configure(self):
-        self.app.push_screen("configure")
+        self.app.push_screen("configure") 
 
     def action_go_to_encrypt(self):
         self.app.push_screen("encrypt")

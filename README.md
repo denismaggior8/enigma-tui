@@ -9,7 +9,7 @@ Built with Python, it leverages [**enigmapython**](https://pypi.org/project/enig
 By following this procedure, you leverage [**pytest-watch**](https://pypi.org/project/pytest-watch/) to live reloading the application upon Python code change. 
 
 ```console
-$ pip install -r requirements-dev.txt
+$ pip install -re requirements-dev.txt
 $ cd src/tui
 $ ptw --runner enigmatui
 ```

@@ -12,7 +12,7 @@ class EnigmaApp(App[str]):
    
     CSS_PATH = "css/styles.css"
     TITLE = "Enigma TUI"
-    SUB_TITLE = "A Terminal User Interface for Enigma machines, by Denis Maggiorotto"
+    SUB_TITLE = "A Terminal User Interface for Enigma machines by Denis Maggiorotto"
 
     def compose(self) -> ComposeResult:
         yield Header()
