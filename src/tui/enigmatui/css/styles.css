@@ -73,9 +73,15 @@ EncryptScreen Static {
 }
 
 EncryptScreen #enigma-diagram {
-    content-align-horizontal: center;
-    margin-bottom: 3;
+    content-align-horizontal: left;
     margin-top: 3;
+    height: 60;
+}
+
+EncryptScreen #enigma-wirings {
+    content-align-horizontal: center;
+    margin-top: 3;
+    height: 60;
 }
 
 /* Modals */

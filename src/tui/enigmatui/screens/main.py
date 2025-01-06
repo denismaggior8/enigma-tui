@@ -6,18 +6,23 @@ from enigmatui.screens.configure import ConfigureScreen
 from enigmatui.screens.encrypt import EncryptScreen
 from enigmatui.data.enigma_config   import EnigmaConfig
 
-class MainScreen(Screen):
+from enigmatui.utility.observer import Observer
+from enigmatui.screens.config_null_modal import ConfigurationNull
 
-    BINDINGS = [("c", "go_to_configure", "Configure"), ("e", "go_to_encrypt", "De/Encrypt")]
+class MainScreen(Screen,Observer):
 
     enigma_config = EnigmaConfig()
+
+    BINDINGS = [("c", "go_to_configure", "Configure"),("e", "go_to_encrypt", "De/Encrypt")]
+
+    
 
     def action_go_to_configure(self):
         self.app.push_screen("configure") 
 
     def action_go_to_encrypt(self):
         if not self.enigma_config.enigma:
-            self.app.push_screen("configure")
+            self.app.push_screen(ConfigurationNull())
         else:
             self.app.push_screen("encrypt")
 
@@ -27,5 +32,11 @@ class MainScreen(Screen):
         yield Footer()
 
     def on_mount(self):
+        self.enigma_config.add_observer(self)
         self.app.install_screen(ConfigureScreen(), name="configure")
         self.app.install_screen(EncryptScreen(), name="encrypt")
+
+    def update(self, observable, *args, **kwargs):    
+        None
+
+   

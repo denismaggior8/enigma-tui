@@ -51,7 +51,7 @@ class ConfigureScreen(Screen):
             reflector = globals()[self.reflector_type_select.value]()
 
             if self.enigma_type_select.value == "EnigmaM3":
-                self.enigma_config.enigma = EnigmaM3(rotor1=rotor0, 
+                self.enigma_config.set_enigma(EnigmaM3(rotor1=rotor0, 
                                                      rotor2=rotor1, 
                                                      rotor3=rotor2, 
                                                      plugboard=PlugboardPassthrough(),
@@ -59,6 +59,7 @@ class ConfigureScreen(Screen):
                                                      reflector=reflector,
                                                      auto_increment_rotors=True
                                                      )
+                                            )
             self.app.pop_screen()
         else:
             self.app.push_screen(ConfigurationNotComplete())
