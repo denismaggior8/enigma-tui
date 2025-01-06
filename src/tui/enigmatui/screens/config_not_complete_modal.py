@@ -4,21 +4,15 @@ from textual.widgets import Button, Label
 from textual import on
 from textual.containers import Container, Horizontal
 
-class ExitScreen(ModalScreen):
+class ConfigurationNotComplete(ModalScreen):
     """A modal exit screen."""
 
     def compose(self) -> ComposeResult:
         with Container():
-            yield Label("Are you sure you want to exit configuration screen without saving?")
+            yield Label("Enigma configuration is not yet complete, please fill the empty field before saving!")
             with Horizontal():
-                yield Button("no", id="no")
-                yield Button("yes", id="yes")
-    
-    @on(Button.Pressed, "#yes")
-    def exit_app(self) -> None:
-        self.app.pop_screen()
-        self.app.pop_screen()
+                yield Button("ok", id="ok")
 
-    @on(Button.Pressed, "#no")
+    @on(Button.Pressed, "#ok")
     def back_to_app(self) -> None:
         self.app.pop_screen()

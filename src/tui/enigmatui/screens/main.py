@@ -21,5 +21,6 @@ class MainScreen(Screen):
         yield Footer()
 
     def on_mount(self):
+        None
         self.app.install_screen(ConfigureScreen(), name="configure")
         self.app.install_screen(EncryptScreen(), name="encrypt")

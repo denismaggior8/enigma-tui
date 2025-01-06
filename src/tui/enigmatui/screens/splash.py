@@ -34,7 +34,7 @@ class SplashScreen(Screen):
         yield Static(" Welcome! ", id="welcome")
         yield Static(SPLASH_TEXT, id="splash-text")
         yield Static(ENIGMA_DIAG, id="enigma-diagram")
-        yield Static("On every screen, ⬇️  see in the blue bar at the bottom ⬇️  the possible options. Now press enter to continue.", id="any-key")
+        yield Static("On every screen, ⬇️  see in the bar at the bottom ⬇️  the possible options. Now press enter to continue.", id="any-key")
         yield Footer()
     
  
