@@ -4,16 +4,22 @@ from textual.containers import Horizontal, Vertical
 from textual.widgets import Static, Header, Footer, Button
 from enigmatui.screens.configure import ConfigureScreen
 from enigmatui.screens.encrypt import EncryptScreen
+from enigmatui.data.enigma_config   import EnigmaConfig
 
 class MainScreen(Screen):
 
     BINDINGS = [("c", "go_to_configure", "Configure"), ("e", "go_to_encrypt", "De/Encrypt")]
 
+    enigma_config = EnigmaConfig()
+
     def action_go_to_configure(self):
         self.app.push_screen("configure") 
 
     def action_go_to_encrypt(self):
-        self.app.push_screen("encrypt")
+        if not self.enigma_config.enigma:
+            self.app.push_screen("configure")
+        else:
+            self.app.push_screen("encrypt")
 
     def compose(self) -> ComposeResult:
         yield Header()
@@ -21,6 +27,5 @@ class MainScreen(Screen):
         yield Footer()
 
     def on_mount(self):
-        None
         self.app.install_screen(ConfigureScreen(), name="configure")
         self.app.install_screen(EncryptScreen(), name="encrypt")

@@ -59,6 +59,25 @@ ConfigureScreen Static {
     align: center middle;
 }
 
+/* De/Encrypt screen */
+
+EncryptScreen {
+    background: #000000;
+    color: #ffffff;
+    
+}
+
+EncryptScreen Static {
+    margin-left: 2;
+    align: center middle;
+}
+
+EncryptScreen #enigma-diagram {
+    content-align-horizontal: center;
+    margin-bottom: 3;
+    margin-top: 3;
+}
+
 /* Modals */
 
 ExitConfiguration {

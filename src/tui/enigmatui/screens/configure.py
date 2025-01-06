@@ -6,7 +6,8 @@ from enigmatui.data.enigma_config import EnigmaConfig
 from enigmatui.screens.exit_configutation_without_saving_modal import ExitConfiguration
 from enigmatui.screens.config_not_complete_modal import ConfigurationNotComplete
 
-import enigmapython
+from enigmapython.Enigma import Enigma
+
 # Enigma M3 components
 from enigmapython.EnigmaM3 import EnigmaM3
 from enigmapython.EnigmaM3RotorI import EnigmaM3RotorI
@@ -19,6 +20,7 @@ from enigmapython.EnigmaM3RotorVII import EnigmaM3RotorVII
 from enigmapython.EnigmaM3RotorVIII import EnigmaM3RotorVIII
 
 from enigmapython.EtwPassthrough import EtwPassthrough
+from enigmapython.PlugboardPassthrough import PlugboardPassthrough
 
 from enigmapython.ReflectorUKWB import ReflectorUKWB
 from enigmapython.ReflectorUKWC import ReflectorUKWC
@@ -42,9 +44,26 @@ class ConfigureScreen(Screen):
                 config_complete = False
                 break
         if config_complete == True:
+            etw = globals()[self.etw_type_select.value]()
+            rotor0 =  globals()[self.rotor0_type_select.value](position=int(self.rotor0_position_select.value),ring=int(self.rotor0_ring_select.value))
+            rotor1 =  globals()[self.rotor1_type_select.value](position=int(self.rotor1_position_select.value),ring=int(self.rotor1_ring_select.value))
+            rotor2 =  globals()[self.rotor2_type_select.value](position=int(self.rotor2_position_select.value),ring=int(self.rotor2_ring_select.value))
+            reflector = globals()[self.reflector_type_select.value]()
+
+            if self.enigma_type_select.value == "EnigmaM3":
+                self.enigma_config.enigma = EnigmaM3(rotor1=rotor0, 
+                                                     rotor2=rotor1, 
+                                                     rotor3=rotor2, 
+                                                     plugboard=PlugboardPassthrough(),
+                                                     etw=etw, 
+                                                     reflector=reflector,
+                                                     auto_increment_rotors=True
+                                                     )
             self.app.pop_screen()
         else:
             self.app.push_screen(ConfigurationNotComplete())
+            
+            
             
         
 
