@@ -174,8 +174,9 @@ class ConfigureScreen(Screen):
             self.query_one("#rotor3_position_vertical", Vertical).add_class("invisible")
             self.query_one("#rotor3_ring_vertical", Vertical).add_class("invisible")
 
-           
-           
+            self.rotor3_type_select.remove_class("active")
+            self.rotor3_position_select.remove_class("active")
+            self.rotor3_ring_select.remove_class("active")
             
             if event.value == "EnigmaM3":
 
@@ -223,6 +224,10 @@ class ConfigureScreen(Screen):
                 self.query_one("#rotor3_type_vertical", Vertical).remove_class("invisible")
                 self.query_one("#rotor3_position_vertical", Vertical).remove_class("invisible")
                 self.query_one("#rotor3_ring_vertical", Vertical).remove_class("invisible")
+
+                self.rotor3_type_select.add_class("active")
+                self.rotor3_position_select.add_class("active")
+                self.rotor3_ring_select.add_class("active")
 
             else:
                 self.reset_form_options()
