@@ -11,7 +11,7 @@ By following this procedure, you leverage [**pytest-watch**](https://pypi.org/pr
 ```console
 $ pip install -r requirements-dev.txt
 $ cd src/tui
-$  ptw --runner "textual run --dev  enigmatui/__main__.py"      
+$ ptw --runner "textual run --dev  enigmatui/__main__.py"      
 ```
 
 Be aware that, in this case, to terminate the application you have to use CTRL+C (instead of any other shortcut configured in the app)

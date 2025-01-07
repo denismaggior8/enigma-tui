@@ -10,8 +10,15 @@ from enigmatui.data.enigma_config import EnigmaConfig
 
 class EncryptScreen(Screen,Observer):
 
-    BINDINGS = [("escape", "exit", "Exit")]
+    BINDINGS = [("ctrl+r", "reset", "Reset Enigma"),
+                ("escape", "exit", "Exit")]
     enigma_config = EnigmaConfig()
+
+    def action_reset(self):
+        self.enigma_config.reset_enigma()
+        self.query_one("#cleartext", TextArea).clear()
+        self.query_one("#ciphertext", TextArea).clear()
+        self.update(None,None,None)
 
     def action_exit(self):
         self.app.pop_screen()    

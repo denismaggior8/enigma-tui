@@ -116,7 +116,12 @@ EncryptScreen TextArea {
 
 EncryptScreen #cleartext-label{
     margin-left: 2;
-    margin-bottom: 0;
+    margin-top: 1;
+}
+
+EncryptScreen #ciphertext-label{
+    margin-left: 2;
+    margin-top: 1;
 }
 
 /* Modals */
