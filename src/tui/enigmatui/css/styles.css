@@ -114,6 +114,11 @@ EncryptScreen TextArea {
     max-height: 4;
 }
 
+EncryptScreen #cleartext-label{
+    margin-left: 2;
+    margin-bottom: 0;
+}
+
 /* Modals */
 
 ExitConfiguration {

@@ -29,19 +29,31 @@ class EncryptScreen(Screen,Observer):
             ),
             id="enigma-diagram-wirings-horizontal"
         )
-        yield Horizontal(
-            
-        )
         yield Vertical(
             Horizontal(
-                PlaceholderTextArea(id="cleartext", placeholder="Type your cleartext here...")
+                Static("Cleartext:", id="cleartext-label"),
             ),
             Horizontal(
-                PlaceholderTextArea(id="ciphertext", read_only=True, placeholder="Read your chipertext here...")
+                TextArea(id="cleartext")
+            ),
+            Static(""),
+            Static(""),
+            Horizontal(
+                Static("Ciphertext:", id="ciphertext-label"),
+            ),
+            Horizontal(
+                TextArea(id="ciphertext", read_only=True)
             )
         )
         
         yield Footer()
+
+    def on_text_area_changed(self, event: TextArea.Changed) -> None:
+        if event.text_area.id == "cleartext" and event.text_area.text != 'Type your cleartext here...' and event.text_area.text != "":
+            if self.query_one("#ciphertext", TextArea).text == "Read your ciphertext here...":
+               self.query_one("#ciphertext", TextArea).clear()
+            self.query_one("#ciphertext", TextArea).text = self.query_one("#ciphertext", TextArea).text + self.enigma_config.enigma.input_char(event.text_area.text[-1])
+            self.update(self.enigma_config, None, None)
 
     def on_mount(self):
        self.enigma_config.add_observer(self)
