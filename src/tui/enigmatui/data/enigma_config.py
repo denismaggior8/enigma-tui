@@ -17,11 +17,11 @@ class EnigmaConfig(Observable):
     
     def set_configured_enigma(self, enigma):
         self.configured_enigma = enigma
-        self.reset_enigma()
+        self.enigma = self.configured_enigma.clone()
         self.notify_observers(self,None,None)
 
     def reset_enigma(self):
-        self.enigma =  copy.deepcopy(self.configured_enigma) 
+        self.enigma = self.configured_enigma.clone()
         self.notify_observers(self,None,None)
     
    
