@@ -5,7 +5,7 @@ from enigmapython.Utils import Utils
 from textual.containers import Container, Horizontal, Vertical
 
 from enigmatui.utility.observer import Observer
-from enigmatui.widgets.placeholder_textarea import PlaceholderTextArea
+from enigmatui.widgets.undeletable_textarea import UndeletableTextArea
 from enigmatui.data.enigma_config import EnigmaConfig
 
 class EncryptScreen(Screen,Observer):
@@ -34,7 +34,7 @@ class EncryptScreen(Screen,Observer):
                 Static("Cleartext:", id="cleartext-label"),
             ),
             Horizontal(
-                TextArea(id="cleartext")
+                UndeletableTextArea(id="cleartext")
             ),
             Static(""),
             Static(""),
@@ -42,7 +42,7 @@ class EncryptScreen(Screen,Observer):
                 Static("Ciphertext:", id="ciphertext-label"),
             ),
             Horizontal(
-                TextArea(id="ciphertext", read_only=True)
+                UndeletableTextArea(id="ciphertext", read_only=True)
             )
         )
         
