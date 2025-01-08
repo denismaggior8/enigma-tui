@@ -1,8 +1,8 @@
 # Enigma TUI (Terminal User Interface)
 
-**Enigma TUI** is a Terminal User Interface for Enigma machines, allowing you to simulate different Enigma machine models from the  terminal.
+**Enigma TUI** is a **T**erminal **U**ser **I**nterface for Enigma machines, allowing you to simulate different Enigma machine models from the  terminal.
 
-Built with Python, it leverages [**enigmapython**](https://pypi.org/project/enigmapython/) and [**textual**](https://pypi.org/project/textual/) Python packages.
+Built with Python, it leverages [**enigmapython**](https://pypi.org/project/enigmapython/) as Enigma engine and [**textual**](https://pypi.org/project/textual/) to render the interface.
 
 ## Run in development mode
 

@@ -12,7 +12,7 @@ setup(
     long_description_content_type='text/markdown',
     url="https://github.com/denismaggior8/enigma-tui",
     name="enigmatui",
-    version="0.0.1",
+    version="1.0.0",
     include_package_data=True,
     packages=find_packages(
         # All keyword arguments below are optional:
@@ -25,7 +25,7 @@ setup(
     },
     install_requires=[
         "textual",
-        "enigmapython"
+        "enigmapython==1.2.0"
     ],
     description="Enigma TUI is a Terminal User Interface for Enigma machines, allowing you to simulate different Enigma machine models from the terminal"
 )
