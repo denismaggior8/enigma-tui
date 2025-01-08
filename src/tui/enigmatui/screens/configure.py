@@ -215,6 +215,9 @@ class ConfigureScreen(Screen):
     def on_select_changed(self, event: Select.Changed) -> None:
         if event.select.id == "enigma_type":
             
+
+            self.enigma_config.unset_configured_enigma()
+
             self.query_one("#rotor3_type_vertical", Vertical).add_class("invisible")
             self.query_one("#rotor3_position_vertical", Vertical).add_class("invisible")
             self.query_one("#rotor3_ring_vertical", Vertical).add_class("invisible")

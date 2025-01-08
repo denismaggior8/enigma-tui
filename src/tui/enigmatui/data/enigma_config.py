@@ -19,6 +19,10 @@ class EnigmaConfig(Observable):
         self.configured_enigma = enigma
         self.enigma = self.configured_enigma.clone()
         self.notify_observers(self,None,None)
+    
+    def unset_configured_enigma(self):
+        self.configured_enigma = None
+        self.enigma = None
 
     def reset_enigma(self):
         self.enigma = self.configured_enigma.clone()

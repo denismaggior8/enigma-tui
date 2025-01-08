@@ -162,7 +162,7 @@ ConfigurationNotComplete {
 }
 
 ConfigurationNotComplete > Container {
-    width: auto;
+    width: 50;
     height: auto;
     border: thick $background 99%;
     background: $surface;
@@ -184,7 +184,7 @@ ConfigurationNotComplete > Container > Horizontal {
 }
 
 ConfigurationNotComplete > Container > Horizontal > Button {
-    margin: 2 4;
+    margin: 2 17;
 }
 
 ConfigurationNull {
