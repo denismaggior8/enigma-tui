@@ -19,6 +19,19 @@ from enigmapython.EnigmaM3RotorVI import EnigmaM3RotorVI
 from enigmapython.EnigmaM3RotorVII import EnigmaM3RotorVII
 from enigmapython.EnigmaM3RotorVIII import EnigmaM3RotorVIII
 
+# Enigma M4 components
+from enigmapython.EnigmaM4 import EnigmaM4
+from enigmapython.EnigmaM4RotorI import EnigmaM4RotorI
+from enigmapython.EnigmaM4RotorII import EnigmaM4RotorII
+from enigmapython.EnigmaM4RotorIII import EnigmaM4RotorIII
+from enigmapython.EnigmaM4RotorIV import EnigmaM4RotorIV
+from enigmapython.EnigmaM4RotorV import EnigmaM4RotorV
+from enigmapython.EnigmaM4RotorVI import EnigmaM4RotorVI
+from enigmapython.EnigmaM4RotorVII import EnigmaM4RotorVII
+from enigmapython.EnigmaM4RotorVIII import EnigmaM4RotorVIII
+from enigmapython.EnigmaM4RotorBeta import EnigmaM4RotorBeta
+from enigmapython.EnigmaM4RotorGamma import EnigmaM4RotorGamma
+
 from enigmapython.EtwPassthrough import EtwPassthrough
 from enigmapython.PlugboardPassthrough import PlugboardPassthrough
 
@@ -54,6 +67,18 @@ class ConfigureScreen(Screen):
                 self.enigma_config.set_configured_enigma(EnigmaM3(rotor1=rotor0, 
                                                      rotor2=rotor1, 
                                                      rotor3=rotor2, 
+                                                     plugboard=PlugboardPassthrough(),
+                                                     etw=etw, 
+                                                     reflector=reflector,
+                                                     auto_increment_rotors=True
+                                                     )
+                                            )
+            elif self.enigma_type_select.value == "EnigmaM4":
+                rotor3 =  globals()[self.rotor3_type_select.value](position=int(self.rotor3_position_select.value),ring=int(self.rotor3_ring_select.value))
+                self.enigma_config.set_configured_enigma(EnigmaM4(rotor1=rotor0, 
+                                                     rotor2=rotor1, 
+                                                     rotor3=rotor2,
+                                                     rotor4=rotor3, 
                                                      plugboard=PlugboardPassthrough(),
                                                      etw=etw, 
                                                      reflector=reflector,
@@ -248,6 +273,49 @@ class ConfigureScreen(Screen):
                 self.rotor3_type_select.add_class("active")
                 self.rotor3_position_select.add_class("active")
                 self.rotor3_ring_select.add_class("active")
+
+                self.etw_type_select.set_options([("Passthrough ({})".format(EtwPassthrough.wiring), "EtwPassthrough")]) 
+                self.etw_type_select.value="EtwPassthrough"
+
+                m4_rotors_options = [
+                    ("I ({})".format(EnigmaM3RotorI.wiring), "EnigmaM3RotorI"), 
+                    ("II ({})".format(EnigmaM3RotorII.wiring), "EnigmaM3RotorII"), 
+                    ("III ({})".format(EnigmaM3RotorIII.wiring), "EnigmaM3RotorIII"),
+                    ("IV ({})".format(EnigmaM3RotorIV.wiring), "EnigmaM3RotorIV"), 
+                    ("V ({})".format(EnigmaM3RotorV.wiring), "EnigmaM3RotorV"), 
+                    ("VI ({})".format(EnigmaM3RotorVI.wiring), "EnigmaM3RotorVI"),
+                    ("VII ({})".format(EnigmaM3RotorVII.wiring), "EnigmaM3RotorVII"), 
+                    ("VIII ({})".format(EnigmaM3RotorVIII.wiring), "EnigmaM3RotorVIII")]
+                
+                self.rotor0_type_select.set_options(m4_rotors_options)
+                self.rotor0_position_select.set_options([(str(i), str(i)) for i in range(26)])
+                self.rotor0_position_select.value = "0"
+                self.rotor0_ring_select.set_options([(str(i), str(i)) for i in range(26)])
+                self.rotor0_ring_select.value = "0"
+
+                self.rotor1_type_select.set_options(m4_rotors_options)
+                self.rotor1_position_select.set_options([(str(i), str(i)) for i in range(26)])
+                self.rotor1_position_select.value = "0"
+                self.rotor1_ring_select.set_options([(str(i), str(i)) for i in range(26)])
+                self.rotor1_ring_select.value = "0"
+
+                self.rotor2_type_select.set_options(m4_rotors_options)
+                self.rotor2_position_select.set_options([(str(i), str(i)) for i in range(26)])
+                self.rotor2_position_select.value = "0"
+                self.rotor2_ring_select.set_options([(str(i), str(i)) for i in range(26)])
+                self.rotor2_ring_select.value = "0"
+
+                self.rotor3_type_select.set_options(m4_rotors_options)
+                self.rotor3_position_select.set_options([(str(i), str(i)) for i in range(26)])
+                self.rotor3_position_select.value = "0"
+                self.rotor3_ring_select.set_options([(str(i), str(i)) for i in range(26)])
+                self.rotor3_ring_select.value = "0"
+
+                self.reflector_type_select.set_options([
+                    ("UKW-B ({})".format(ReflectorUKWB.wiring), "ReflectorUKWB"), 
+                    ("UKW-C ({})".format(ReflectorUKWC.wiring), "ReflectorUKWC")])
+                self.reflector_type_select.value = "ReflectorUKWB"
+                self.reflector_type_select.allow_blank=False
 
             else:
                 self.reset_form_options()
