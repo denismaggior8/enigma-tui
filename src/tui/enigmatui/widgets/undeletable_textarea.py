@@ -11,7 +11,7 @@ class UndeletableTextArea(TextArea):
 
     def _on_key(self,  event: events.Key):
         #if event.key == "backspace" or event.key == "enter" :
-        if (event.key == "enter" or event.key == "space" or event.key == "backspace") or (event.is_printable and event.key not in self.enigma_config.enigma.alphabet_list):
+        if (event.key == "enter" or event.key == "space" or event.key == "backspace" or event.key == "ctrl+d") or (event.is_printable and event.key not in self.enigma_config.enigma.alphabet_list):
             event.stop()
             event.prevent_default()
         else:
