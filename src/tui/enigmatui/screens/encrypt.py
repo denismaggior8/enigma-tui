@@ -11,7 +11,7 @@ from enigmatui.data.enigma_config import EnigmaConfig
 class EncryptScreen(Screen,Observer):
 
     BINDINGS = [("ctrl+r", "reset", "Reset Enigma"),
-                ("escape", "exit", "Exit")]
+                ("escape", "back", "Back")]
     enigma_config = EnigmaConfig()
 
     def action_reset(self):
@@ -20,7 +20,7 @@ class EncryptScreen(Screen,Observer):
         self.query_one("#ciphertext", TextArea).clear()
         self.update(None,None,None)
 
-    def action_exit(self):
+    def action_back(self):
         self.app.pop_screen()    
 
     def compose(self) -> ComposeResult:

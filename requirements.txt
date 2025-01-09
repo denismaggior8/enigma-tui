@@ -1,2 +1,3 @@
-enigmapython
-textual
+enigmapython==1.2.0
+textual==1.0.0
+./src/tui
