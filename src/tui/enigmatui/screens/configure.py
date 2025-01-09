@@ -43,8 +43,8 @@ class ConfigureScreen(Screen):
     enigma_config = EnigmaConfig()
 
 
-    BINDINGS = [("s", "save_and_exit", "Save and exit"),
-                ("escape", "exit", "Exit")
+    BINDINGS = [("s", "save_and_exit", "Save and exit")
+                #,("escape", "exit", "Exit")
                ]
 
     def action_exit(self):
