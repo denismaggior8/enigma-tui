@@ -21,7 +21,9 @@ $ python enigmatui
 
 ## How it works
 
-Read the usage instructions is more difficult than using the application itself. Enigma TUI has a fairy simple user interface with a couple of screens to let you configure an Enigma machine (one among the supported models) and encrypt/decrypt messages. 
+Reading the usage instructions is more difficult than using the application itself. 
+
+Enigma TUI has a fairy simple user interface with a couple of screens to let you configure an Enigma machine (among the supported models) and encrypt/decrypt messages, plus seeing in realtime the machine internals (rotors positions, wirings) and how a single letter is scrambled from the keyboard to rotors, through reflector and back up to lamp.
 
 Please refer to the following flowchart to navigate the app.
 
