@@ -9,7 +9,7 @@ class ConfigurationNotComplete(ModalScreen):
 
     def compose(self) -> ComposeResult:
         with Container():
-            yield Label("Enigma configuration is not yet complete, please fill (all) the empty field/s before saving!")
+            yield Label("Enigma configuration is not valid, please fill (all) the empty field(s) before saving!")
             with Horizontal():
                 yield Button("ok", id="ok")
 
