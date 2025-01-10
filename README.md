@@ -52,7 +52,10 @@ flowchart TD
     B -- Quit --> End([Stop])
     C -- Quit --> End([Stop])
     D -- Quit --> End([Stop])
+    
 ```
+
+Anytime you can press `ctrl-q` to quit the application.
 
 ## Run Enigma TUI in development mode
 
