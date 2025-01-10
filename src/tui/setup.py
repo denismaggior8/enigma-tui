@@ -18,6 +18,8 @@ setup(
         # All keyword arguments below are optional:
         where='.',  # '.' by default
     ),
+    include_dirs= ["css"],
+    package_data={'enigmatui': ['css/*.css', 'css/*.css']},
     entry_points={
         "console_scripts": [
             "enigmatui = enigmatui.__main__:main",  # 
