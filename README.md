@@ -16,8 +16,13 @@ Built with Python, it employs [**enigmapython**](https://pypi.org/project/enigma
 Use Python to run Enigma TUI's package
 
 ```console
-$ python enigmatui
+$ python -m enigmatui
 ```
+
+## Enigma TUI online version
+
+An online version of Enigma TUI exists thanks to the [Render](https://render.com)'s free plan. If you'd like to test Enigma TUI before installing it locally, please refer to https://enigma-tui.onrender.com/
+
 
 ## How it works
 
@@ -61,3 +66,7 @@ $ ptw --runner "textual run --dev  enigmatui/__main__.py"
 ```
 
 The above commands are valid provided that you cloned the [**enigma-tui**](https://github.com/denismaggior8/enigma-tui) repository from GitHub and your terminal is in the repository's root directory.
+
+## Enigma references
+
+If you want more details about how an Enigma machine works, especially to understand the difference between the machine models, rotors types ans so on, I can not suggest you a better reference than [Crypto Musem](https://www.cryptomuseum.com/crypto/enigma/index.htm) 
