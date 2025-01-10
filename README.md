@@ -2,7 +2,7 @@
 
 ![Enigma TUI](img/enigmatui.png)
 
-**Enigma TUI** is a **T**erminal **U**ser **I**nterface for Enigma machines, allowing you to simulate different Enigma machine models from the  terminal.
+**Enigma TUI** is a **T**erminal **U**ser **I**nterface for Enigma machines, allowing you to simulate different Enigma machine models from the terminal.
 
 Built with Python, it employs [**enigmapython**](https://pypi.org/project/enigmapython/) as Enigma engine and [**textual**](https://pypi.org/project/textual/) to render the interface.
 
