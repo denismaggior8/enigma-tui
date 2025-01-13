@@ -60,10 +60,10 @@ class ConfigureScreen(Screen):
                 break
 
         # Check if plugboard contains only letter pairs(and not single letters)
-        if len(self.query_one("#plugboard", PlugboardInput).value) % 2 == 1:
+        if len(self.query_one("#plugboard", PlugboardInput).value.replace(" ", "")) % 2 != 0:
             self.app.push_screen(PlugboardContentInvalid())
-            return 
-        if config_complete == True:
+         
+        elif config_complete == True:
             etw = globals()[self.etw_type_select.value]()
             rotor0 =  globals()[self.rotor0_type_select.value](position=int(self.rotor0_position_select.value),ring=int(self.rotor0_ring_select.value))
             rotor1 =  globals()[self.rotor1_type_select.value](position=int(self.rotor1_position_select.value),ring=int(self.rotor1_ring_select.value))
