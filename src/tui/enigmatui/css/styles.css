@@ -217,6 +217,37 @@ ConfigurationNull > Container > Horizontal > Button {
     margin: 2 17;
 }
 
+PlugboardContentInvalid {
+    align: center middle;
+}
+
+PlugboardContentInvalid > Container {
+    width: 50;
+    height: auto;
+    border: thick $background 99%;      
+    background: $surface;
+    align: center middle;
+}
+
+PlugboardContentInvalid > Container > Label {
+    width: 100%;
+    content-align-horizontal: center;
+    margin-top: 1;
+    margin-left: 1;
+    margin-right: 1;
+    text-align: center;
+}
+
+PlugboardContentInvalid > Container > Horizontal {
+    width: auto;
+    height: auto;
+}
+
+PlugboardContentInvalid > Container > Horizontal > Button {
+    margin: 2 17;
+}
+
+
 /* commons */
 .invisible {
     display: none;

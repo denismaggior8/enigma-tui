@@ -5,6 +5,8 @@ from textual.containers import Container, Horizontal, Vertical
 from enigmatui.data.enigma_config import EnigmaConfig
 from enigmatui.screens.exit_configutation_without_saving_modal import ExitConfiguration
 from enigmatui.screens.config_not_complete_modal import ConfigurationNotComplete
+from enigmatui.screens.plugboard_content_invalid_modal import PlugboardContentInvalid
+from enigmatui.widgets.plugboard_input import PlugboardInput
 
 from enigmapython.Enigma import Enigma
 
@@ -43,7 +45,7 @@ class ConfigureScreen(Screen):
     enigma_config = EnigmaConfig()
 
 
-    BINDINGS = [("s", "save_and_exit", "Save and exit")
+    BINDINGS = [("ctrl+s", "save_and_exit", "Save and exit")
                 #,("escape", "exit", "Exit")
                ]
 
@@ -56,6 +58,11 @@ class ConfigureScreen(Screen):
             if select.value  == Select.BLANK:
                 config_complete = False
                 break
+
+        # Check if plugboard contains only letter pairs(and not single letters)
+        if len(self.query_one("#plugboard", PlugboardInput).value) % 2 == 1:
+            self.app.push_screen(PlugboardContentInvalid())
+            return 
         if config_complete == True:
             etw = globals()[self.etw_type_select.value]()
             rotor0 =  globals()[self.rotor0_type_select.value](position=int(self.rotor0_position_select.value),ring=int(self.rotor0_ring_select.value))
@@ -130,10 +137,11 @@ class ConfigureScreen(Screen):
                 )
             
         )
+        yield Static("")
         yield Vertical(
                     Static("Plugboard:"),
-                    Input("", 
-                          placeholder="Type letters to scramble here", 
+                    PlugboardInput("", 
+                          placeholder="Type letter pairs to scramble", 
                           id="plugboard"),
                     id="plugboard_vertical",
                     classes="invisible"
@@ -223,7 +231,7 @@ class ConfigureScreen(Screen):
         yield Footer()
 
     async def on_input_changed(self, event: Input.Submitted) -> None:
-        if event.input.id == "plugboard":
+        if event.input.id == "plugboard" :
             raw_text = event.value.replace(" ", "")  # Remove spaces for raw processing
 
             # Ensure that the last character is not duplicated
@@ -243,6 +251,7 @@ class ConfigureScreen(Screen):
             if event.input.value != spaced_text:
                 event.input.value = spaced_text
                 event.input.cursor_position = len(spaced_text)  # Move the cursor to the end
+                    
 
     
     def on_select_changed(self, event: Select.Changed) -> None:
