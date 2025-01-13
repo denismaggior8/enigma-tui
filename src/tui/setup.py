@@ -12,7 +12,7 @@ setup(
     long_description_content_type='text/markdown',
     url="https://github.com/denismaggior8/enigma-tui",
     name="enigmatui",
-    version="1.0.2",
+    version="1.1.0",
     include_package_data=True,
     packages=find_packages(
         # All keyword arguments below are optional:

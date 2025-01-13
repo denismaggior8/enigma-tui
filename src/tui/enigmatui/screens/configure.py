@@ -1,6 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.screen import Screen
-from textual.widgets import Static, Header, Footer, Select
+from textual.widgets import Static, Header, Footer, Select, Input
 from textual.containers import Container, Horizontal, Vertical
 from enigmatui.data.enigma_config import EnigmaConfig
 from enigmatui.screens.exit_configutation_without_saving_modal import ExitConfiguration
@@ -96,6 +96,7 @@ class ConfigureScreen(Screen):
         #self.app.pop_screen()
 
     def on_mount(self):
+        self.plugboard_input = self.query_one("#plugboard", Input)
         self.enigma_type_select = self.query_one("#enigma_type", Select)
         self.etw_type_select = self.query_one("#etw_type", Select)
         self.rotor0_type_select = self.query_one("#rotor0_type", Select)
@@ -122,12 +123,22 @@ class ConfigureScreen(Screen):
             Vertical(
                     Static("Select an Enigma machine model:"),
                     Select(options=[("Enigma M3", "EnigmaM3"),
-                                    ("Enigma M4", "EnigmaM4")],id="enigma_type",
+                                    ("Enigma M4", "EnigmaM4"),
+                                    ("Enigma Z30 Mark I", "EnigmaZ30MarkI")],id="enigma_type",
                                     allow_blank=False, 
                                     classes="active")
                 )
             
         )
+        yield Vertical(
+                    Static("Plugboard:"),
+                    Input("", 
+                          placeholder="Type letters to scramble here", 
+                          id="plugboard"),
+                    id="plugboard_vertical",
+                    classes="invisible"
+        )
+
         yield Vertical(
                     Static("Select ETW type:"),
                     Select(options=[],
@@ -135,7 +146,7 @@ class ConfigureScreen(Screen):
                            classes="active"
                            )
                 )
-        
+            
         yield Horizontal(
                 Vertical(
                     Static("Select rotor 3 type:"),
@@ -211,6 +222,28 @@ class ConfigureScreen(Screen):
 
         yield Footer()
 
+    async def on_input_changed(self, event: Input.Submitted) -> None:
+        if event.input.id == "plugboard":
+            raw_text = event.value.replace(" ", "")  # Remove spaces for raw processing
+
+            # Ensure that the last character is not duplicated
+            current_text = event.value
+            last_char = current_text[-1] if current_text else ""
+
+            # If the last character is a duplicate, remove it
+            if last_char and last_char in raw_text[:-1]:
+                event.input.value = current_text[:-1]
+                event.input.cursor_position = len(event.input.value)  # Keep cursor at the end
+                return  # Skip further processing as we've already corrected
+
+            # Format text to add spaces after every 2 characters
+            spaced_text = " ".join(raw_text[i:i+2] for i in range(0, len(raw_text), 2))
+
+            # Update the input value only if it has changed
+            if event.input.value != spaced_text:
+                event.input.value = spaced_text
+                event.input.cursor_position = len(spaced_text)  # Move the cursor to the end
+
     
     def on_select_changed(self, event: Select.Changed) -> None:
         if event.select.id == "enigma_type":
@@ -221,10 +254,12 @@ class ConfigureScreen(Screen):
             self.query_one("#rotor3_type_vertical", Vertical).add_class("invisible")
             self.query_one("#rotor3_position_vertical", Vertical).add_class("invisible")
             self.query_one("#rotor3_ring_vertical", Vertical).add_class("invisible")
+            self.query_one("#plugboard_vertical", Vertical).add_class("invisible")
 
             self.rotor3_type_select.remove_class("active")
             self.rotor3_position_select.remove_class("active")
             self.rotor3_ring_select.remove_class("active")
+            self.plugboard_input.remove_class("active")
             
             if event.value == "EnigmaM3":
 
@@ -232,6 +267,9 @@ class ConfigureScreen(Screen):
 
                 self.etw_type_select.set_options([("Passthrough\t({})".format(EtwPassthrough.wiring), "EtwPassthrough")]) 
                 self.etw_type_select.value="EtwPassthrough"
+
+                self.query_one("#plugboard_vertical", Vertical).remove_class("invisible")
+                self.plugboard_input.add_class("active")
 
                 m3_rotors_options = [
                     ("I\t({})".format(EnigmaM3RotorI.wiring), "EnigmaM3RotorI"), 
@@ -272,10 +310,12 @@ class ConfigureScreen(Screen):
                 self.query_one("#rotor3_type_vertical", Vertical).remove_class("invisible")
                 self.query_one("#rotor3_position_vertical", Vertical).remove_class("invisible")
                 self.query_one("#rotor3_ring_vertical", Vertical).remove_class("invisible")
+                self.query_one("#plugboard_vertical", Vertical).remove_class("invisible")
 
                 self.rotor3_type_select.add_class("active")
                 self.rotor3_position_select.add_class("active")
                 self.rotor3_ring_select.add_class("active")
+                self.plugboard_input.add_class("active")
 
                 self.etw_type_select.set_options([("Passthrough ({})".format(EtwPassthrough.wiring), "EtwPassthrough")]) 
                 self.etw_type_select.value="EtwPassthrough"
@@ -321,11 +361,14 @@ class ConfigureScreen(Screen):
                     ("UKW-C\t({})".format(ReflectorUKWC.wiring), "ReflectorUKWC")])
                 self.reflector_type_select.value = "ReflectorUKWB"
                 self.reflector_type_select.allow_blank=False
-
+            elif event.value == "EnigmaZ30MarkI":
+                self.query_one("#plugboard_vertical", Vertical).add_class("invisible")
+                self.plugboard_input.remove_class("active")
             else:
                 self.reset_form_options()
        
     def reset_form_options(self):
+        self.plugboard_input.clear()
         self.enigma_type_select.clear()
         self.etw_type_select.set_options([])
         self.rotor0_type_select.set_options([])

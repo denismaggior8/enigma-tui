@@ -69,6 +69,7 @@ In addition, thanks to the `textual run` command with its `--dev` flag, changing
 ```console
 $ pip install -r requirements-dev.txt
 $ cd src/tui
+$ pip install -e .
 $ ptw --runner "textual run --dev  enigmatui/__main__.py"      
 ```
 

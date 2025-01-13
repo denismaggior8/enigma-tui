@@ -2,4 +2,3 @@ enigmapython==1.2.0
 textual==1.0.0
 textual-dev=1.7.0
 pytest-watch==4.2.0
-./src/tui
