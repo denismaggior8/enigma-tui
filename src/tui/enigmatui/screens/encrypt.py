@@ -65,12 +65,12 @@ class EncryptScreen(Screen,Observer):
     def on_mount(self):
        self.enigma_config.add_observer(self)
        self.query_one("#enigma-diagram",Static).update(Utils.render_enigma_diagram(self.enigma_config.enigma))
-       self.query_one("#enigma-wirings",Static).update("ETW wiring: \n{}\n\n".format(self.enigma_config.enigma.etw)+"\n".join(["Rotor {} wiring:\n{}\n".format(i,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector wiring: {}\n".format(self.enigma_config.enigma.reflector))
+       self.query_one("#enigma-wirings",Static).update("Plugboard wiring: \n{}\n\n".format(self.enigma_config.enigma.plugboard)+"ETW wiring: \n{}\n\n".format(self.enigma_config.enigma.etw)+"\n".join(["Rotor {} wiring:\n{}\n".format(i,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector wiring: {}\n".format(self.enigma_config.enigma.reflector))
 
 
     def update(self, observable, *args, **kwargs):
         self.query_one("#enigma-diagram",Static).update(Utils.render_enigma_diagram(self.enigma_config.enigma))
-        self.query_one("#enigma-wirings",Static).update("ETW wiring: \n{}\n\n".format(self.enigma_config.enigma.etw)+"\n".join(["Rotor {} wiring:\n{}\n".format(i,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector wiring: {}\n".format(self.enigma_config.enigma.reflector))
+        self.query_one("#enigma-wirings",Static).update("Plugboard wiring: \n{}\n\n".format(self.enigma_config.enigma.plugboard)+"ETW wiring: \n{}\n\n".format(self.enigma_config.enigma.etw)+"\n".join(["Rotor {} wiring:\n{}\n".format(i,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector wiring: {}\n".format(self.enigma_config.enigma.reflector))
     
     #def on_screen_resume(self) -> None:
     #    self.query_one("#ciphertext", TextArea).clear()

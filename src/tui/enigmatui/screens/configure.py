@@ -35,7 +35,7 @@ from enigmapython.EnigmaM4RotorBeta import EnigmaM4RotorBeta
 from enigmapython.EnigmaM4RotorGamma import EnigmaM4RotorGamma
 
 from enigmapython.EtwPassthrough import EtwPassthrough
-from enigmapython.PlugboardPassthrough import PlugboardPassthrough
+from enigmapython.SwappablePlugboard import SwappablePlugboard
 
 from enigmapython.ReflectorUKWB import ReflectorUKWB
 from enigmapython.ReflectorUKWC import ReflectorUKWC
@@ -69,12 +69,18 @@ class ConfigureScreen(Screen):
             rotor1 =  globals()[self.rotor1_type_select.value](position=int(self.rotor1_position_select.value),ring=int(self.rotor1_ring_select.value))
             rotor2 =  globals()[self.rotor2_type_select.value](position=int(self.rotor2_position_select.value),ring=int(self.rotor2_ring_select.value))
             reflector = globals()[self.reflector_type_select.value]()
+            plugboard = SwappablePlugboard()
+
+            # Iterate through letter pairs
+            for i in range(0, len(self.plugboard_input.value), 2):
+                pair = self.plugboard_input.value[i:i+2]
+                plugboard.swap(pair[0],pair[1])
 
             if self.enigma_type_select.value == "EnigmaM3":
                 self.enigma_config.set_configured_enigma(EnigmaM3(rotor1=rotor0, 
                                                      rotor2=rotor1, 
                                                      rotor3=rotor2, 
-                                                     plugboard=PlugboardPassthrough(),
+                                                     plugboard=plugboard,
                                                      etw=etw, 
                                                      reflector=reflector,
                                                      auto_increment_rotors=True
@@ -86,7 +92,7 @@ class ConfigureScreen(Screen):
                                                      rotor2=rotor1, 
                                                      rotor3=rotor2,
                                                      rotor4=rotor3, 
-                                                     plugboard=PlugboardPassthrough(),
+                                                     plugboard=plugboard,
                                                      etw=etw, 
                                                      reflector=reflector,
                                                      auto_increment_rotors=True
