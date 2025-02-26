@@ -57,10 +57,6 @@ flowchart TD
 
 Anytime you can press `ctrl-q` to quit the application.
 
-> **Note**
-> This version of Enigma TUI does not support the plugboard (a.k.a. Steckerbrett)
-
-
 ## Run Enigma TUI in development mode
 
 By following this procedure, you leverage [**pytest-watch**](https://pypi.org/project/pytest-watch/) to live reloading the application upon Python code change. 
