@@ -78,3 +78,7 @@ The above commands are valid provided that you cloned the [**enigma-tui**](https
 ## Enigma references
 
 If you want more details about how an Enigma machine works, especially to understand the difference between the machine models, rotors types ans so on, I can not suggest you a better reference than [Crypto Musem](https://www.cryptomuseum.com/crypto/enigma/index.htm) 
+
+## Support
+
+Found it useful/funny/educational? Please consider to [![Buy Me a Coffee](https://img.shields.io/badge/buy_me_a_coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/denismaggior8)
