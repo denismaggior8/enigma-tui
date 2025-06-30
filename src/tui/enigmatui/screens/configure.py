@@ -74,12 +74,9 @@ class ConfigureScreen(Screen):
             plugboard = SwappablePlugboard()
 
             # Iterate through letter pairs
-            for i in range(0, len(self.plugboard_input.value), 2):
-                pair = self.plugboard_input.value[i:i+2]
+            pairs = self.plugboard_input.value.split()
+            for i, pair in enumerate(pairs):
                 plugboard.swap(pair[0],pair[1])
-            #pairs = self.plugboard_input.value.split()
-            #for i, pair in enumerate(pairs):
-            #    plugboard.swap(pair[0],pair[1])
 
             if self.enigma_type_select.value == "EnigmaM3":
                 self.enigma_config.set_configured_enigma(EnigmaM3(rotor1=rotor0, 
