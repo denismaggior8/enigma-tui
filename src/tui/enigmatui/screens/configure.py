@@ -33,6 +33,8 @@ from enigmapython.EnigmaM4RotorVII import EnigmaM4RotorVII
 from enigmapython.EnigmaM4RotorVIII import EnigmaM4RotorVIII
 from enigmapython.EnigmaM4RotorBeta import EnigmaM4RotorBeta
 from enigmapython.EnigmaM4RotorGamma import EnigmaM4RotorGamma
+from enigmapython.ReflectorUKWBThin import ReflectorUKWBThin
+from enigmapython.ReflectorUKWCThin import ReflectorUKWCThin
 
 from enigmapython.EtwPassthrough import EtwPassthrough
 from enigmapython.SwappablePlugboard import SwappablePlugboard
@@ -75,6 +77,9 @@ class ConfigureScreen(Screen):
             for i in range(0, len(self.plugboard_input.value), 2):
                 pair = self.plugboard_input.value[i:i+2]
                 plugboard.swap(pair[0],pair[1])
+            #pairs = self.plugboard_input.value.split()
+            #for i, pair in enumerate(pairs):
+            #    plugboard.swap(pair[0],pair[1])
 
             if self.enigma_type_select.value == "EnigmaM3":
                 self.enigma_config.set_configured_enigma(EnigmaM3(rotor1=rotor0, 
@@ -137,7 +142,8 @@ class ConfigureScreen(Screen):
                     Static("Select an Enigma machine model:"),
                     Select(options=[("Enigma M3", "EnigmaM3"),
                                     ("Enigma M4", "EnigmaM4"),
-                                    ("Enigma Z30 Mark I", "EnigmaZ30MarkI")],id="enigma_type",
+                                    # ("Enigma Z30 Mark I", "EnigmaZ30MarkI")
+                                    ],id="enigma_type",
                                     allow_blank=False, 
                                     classes="active")
                 )
@@ -343,9 +349,7 @@ class ConfigureScreen(Screen):
                     ("V\t({})".format(EnigmaM4RotorV.wiring), "EnigmaM4RotorV"), 
                     ("VI\t({})".format(EnigmaM4RotorVI.wiring), "EnigmaM4RotorVI"),
                     ("VII\t({})".format(EnigmaM4RotorVII.wiring), "EnigmaM4RotorVII"), 
-                    ("VIII\t({})".format(EnigmaM4RotorVIII.wiring), "EnigmaM4RotorVIII"),
-                    ("Beta\t({})".format(EnigmaM4RotorBeta.wiring), "EnigmaM4RotorBeta"),
-                    ("Gamma\t({})".format(EnigmaM4RotorGamma.wiring), "EnigmaM4RotorGamma")]
+                    ("VIII\t({})".format(EnigmaM4RotorVIII.wiring), "EnigmaM4RotorVIII")]
                 
                 self.rotor0_type_select.set_options(m4_rotors_options)
                 self.rotor0_position_select.set_options([(str(i), str(i)) for i in range(26)])
@@ -365,16 +369,18 @@ class ConfigureScreen(Screen):
                 self.rotor2_ring_select.set_options([(str(i), str(i)) for i in range(26)])
                 self.rotor2_ring_select.value = "0"
 
-                self.rotor3_type_select.set_options(m4_rotors_options)
+                self.rotor3_type_select.set_options([
+                    ("Beta\t({})".format(EnigmaM4RotorBeta.wiring), "EnigmaM4RotorBeta"),
+                    ("Gamma\t({})".format(EnigmaM4RotorGamma.wiring), "EnigmaM4RotorGamma")])
                 self.rotor3_position_select.set_options([(str(i), str(i)) for i in range(26)])
                 self.rotor3_position_select.value = "0"
                 self.rotor3_ring_select.set_options([(str(i), str(i)) for i in range(26)])
                 self.rotor3_ring_select.value = "0"
 
                 self.reflector_type_select.set_options([
-                    ("UKW-B\t({})".format(ReflectorUKWB.wiring), "ReflectorUKWB"), 
-                    ("UKW-C\t({})".format(ReflectorUKWC.wiring), "ReflectorUKWC")])
-                self.reflector_type_select.value = "ReflectorUKWB"
+                    ("UKW-B Thin\t({})".format(ReflectorUKWBThin.wiring), "ReflectorUKWBThin"), 
+                    ("UKW-C Thin\t({})".format(ReflectorUKWCThin.wiring), "ReflectorUKWCThin")])
+                self.reflector_type_select.value = "ReflectorUKWBThin"
                 self.reflector_type_select.allow_blank=False
             elif event.value == "EnigmaZ30MarkI":
                 self.query_one("#plugboard_vertical", Vertical).add_class("invisible")

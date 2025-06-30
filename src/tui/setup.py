@@ -27,7 +27,7 @@ setup(
     },
     install_requires=[
         "textual==1.0.0",
-        "enigmapython==1.2.0"
+        "enigmapython==1.2.3"
     ],
     description="Enigma TUI is a Terminal User Interface for Enigma machines, allowing you to simulate different Enigma machine models from the terminal"
 )

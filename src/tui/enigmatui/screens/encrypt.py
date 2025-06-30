@@ -1,7 +1,7 @@
 from textual.app import App, ComposeResult
 from textual.screen import Screen
 from textual.widgets import Static, Header, Footer, TextArea
-from enigmapython.Utils import Utils
+from enigmapython.XRay import XRay
 from textual.containers import Container, Horizontal, Vertical
 
 from enigmatui.utility.observer import Observer
@@ -64,13 +64,13 @@ class EncryptScreen(Screen,Observer):
 
     def on_mount(self):
        self.enigma_config.add_observer(self)
-       self.query_one("#enigma-diagram",Static).update(Utils.render_enigma_diagram(self.enigma_config.enigma))
-       self.query_one("#enigma-wirings",Static).update("Plugboard wiring: \n{}\n\n".format(self.enigma_config.enigma.plugboard)+"ETW wiring: \n{}\n\n".format(self.enigma_config.enigma.etw)+"\n".join(["Rotor {} wiring:\n{}\n".format(i,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector wiring: {}\n".format(self.enigma_config.enigma.reflector))
+       self.query_one("#enigma-diagram",Static).update(XRay.render_enigma_xray(self.enigma_config.enigma))
+       self.query_one("#enigma-wirings",Static).update("Plugboard ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.plugboard).__name__,self.enigma_config.enigma.plugboard)+"ETW ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.etw).__name__,self.enigma_config.enigma.etw)+"\n".join(["Rotor {} ({}) wiring:\n{}\n".format(i,type(self.enigma_config.enigma.rotors[i]).__name__,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector ({}) wiring: {}\n".format(type(self.enigma_config.enigma.reflector).__name__,self.enigma_config.enigma.reflector))
 
 
     def update(self, observable, *args, **kwargs):
-        self.query_one("#enigma-diagram",Static).update(Utils.render_enigma_diagram(self.enigma_config.enigma))
-        self.query_one("#enigma-wirings",Static).update("Plugboard wiring: \n{}\n\n".format(self.enigma_config.enigma.plugboard)+"ETW wiring: \n{}\n\n".format(self.enigma_config.enigma.etw)+"\n".join(["Rotor {} wiring:\n{}\n".format(i,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector wiring: {}\n".format(self.enigma_config.enigma.reflector))
+        self.query_one("#enigma-diagram",Static).update(XRay.render_enigma_xray(self.enigma_config.enigma))
+        self.query_one("#enigma-wirings",Static).update("Plugboard ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.plugboard).__name__,self.enigma_config.enigma.plugboard)+"ETW ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.etw).__name__,self.enigma_config.enigma.etw)+"\n".join(["Rotor {} ({}) wiring:\n{}\n".format(i,type(self.enigma_config.enigma.rotors[i]).__name__,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector ({}) wiring: {}\n".format(type(self.enigma_config.enigma.reflector).__name__,self.enigma_config.enigma.reflector))
     
     #def on_screen_resume(self) -> None:
     #    self.query_one("#ciphertext", TextArea).clear()

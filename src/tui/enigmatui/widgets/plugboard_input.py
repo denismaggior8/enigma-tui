@@ -14,7 +14,7 @@ class PlugboardInput(Input):
         super().__init__(*args, **kwargs)
 
     def _on_key(self,  event: events.Key):
-        if event.key == "backspace" or event.key == "tab" or event.key == "shift+tab" or event.key == "ctrl-s":
+        if event.key == "backspace" or event.key == "tab" or event.key == "shift+tab" or (event.key == "ctrl+s"):
             super()._on_key(event)
         elif (event.key == "left" or event.key == "space" or event.key == "ctrl-v") or (not event.is_printable):
             event.stop()
