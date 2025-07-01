@@ -290,14 +290,14 @@ class ConfigureScreen(Screen):
                 self.plugboard_input.add_class("active")
 
                 m3_rotors_options = [
-                    ("I\t({})".format(EnigmaM3RotorI.wiring), "EnigmaM3RotorI"), 
-                    ("II\t({})".format(EnigmaM3RotorII.wiring), "EnigmaM3RotorII"), 
-                    ("III\t({})".format(EnigmaM3RotorIII.wiring), "EnigmaM3RotorIII"),
-                    ("IV\t({})".format(EnigmaM3RotorIV.wiring), "EnigmaM3RotorIV"), 
-                    ("V\t({})".format(EnigmaM3RotorV.wiring), "EnigmaM3RotorV"), 
-                    ("VI\t({})".format(EnigmaM3RotorVI.wiring), "EnigmaM3RotorVI"),
-                    ("VII\t({})".format(EnigmaM3RotorVII.wiring), "EnigmaM3RotorVII"), 
-                    ("VIII\t({})".format(EnigmaM3RotorVIII.wiring), "EnigmaM3RotorVIII")]
+                    ("I\t({})".format(EnigmaM3RotorI.wiring).expandtabs(4), "EnigmaM3RotorI"), 
+                    ("II\t({})".format(EnigmaM3RotorII.wiring).expandtabs(4), "EnigmaM3RotorII"), 
+                    ("III\t({})".format(EnigmaM3RotorIII.wiring).expandtabs(4), "EnigmaM3RotorIII"),
+                    ("IV\t({})".format(EnigmaM3RotorIV.wiring).expandtabs(4), "EnigmaM3RotorIV"), 
+                    ("V\t({})".format(EnigmaM3RotorV.wiring).expandtabs(4), "EnigmaM3RotorV"), 
+                    ("VI\t({})".format(EnigmaM3RotorVI.wiring).expandtabs(4), "EnigmaM3RotorVI"),
+                    ("VII\t({})".format(EnigmaM3RotorVII.wiring).expandtabs(4), "EnigmaM3RotorVII"), 
+                    ("VIII\t({})".format(EnigmaM3RotorVIII.wiring).expandtabs(4), "EnigmaM3RotorVIII")]
                 
                 self.rotor0_type_select.set_options(m3_rotors_options)
                 self.rotor0_position_select.set_options([(str(i), str(i)) for i in range(26)])
@@ -318,8 +318,8 @@ class ConfigureScreen(Screen):
                 self.rotor2_ring_select.value = "0"
 
                 self.reflector_type_select.set_options([
-                    ("UKW-B\t({})".format(ReflectorUKWB.wiring), "ReflectorUKWB"), 
-                    ("UKW-C\t({})".format(ReflectorUKWC.wiring), "ReflectorUKWC")])
+                    ("UKW-B\t({})".format(ReflectorUKWB.wiring).expandtabs(4), "ReflectorUKWB"), 
+                    ("UKW-C\t({})".format(ReflectorUKWC.wiring).expandtabs(4), "ReflectorUKWC")])
                 self.reflector_type_select.value = "ReflectorUKWB"
                 self.reflector_type_select.allow_blank=False
 
@@ -339,14 +339,14 @@ class ConfigureScreen(Screen):
                 self.etw_type_select.value="EtwPassthrough"
 
                 m4_rotors_options = [
-                    ("I\t({})".format(EnigmaM4RotorI.wiring), "EnigmaM4RotorI"), 
-                    ("II\t({})".format(EnigmaM4RotorII.wiring), "EnigmaM4RotorII"), 
-                    ("III\t({})".format(EnigmaM4RotorIII.wiring), "EnigmaM4RotorIII"),
-                    ("IV\t({})".format(EnigmaM4RotorIV.wiring), "EnigmaM4RotorIV"), 
-                    ("V\t({})".format(EnigmaM4RotorV.wiring), "EnigmaM4RotorV"), 
-                    ("VI\t({})".format(EnigmaM4RotorVI.wiring), "EnigmaM4RotorVI"),
-                    ("VII\t({})".format(EnigmaM4RotorVII.wiring), "EnigmaM4RotorVII"), 
-                    ("VIII\t({})".format(EnigmaM4RotorVIII.wiring), "EnigmaM4RotorVIII")]
+                    ("I\t({})".format(EnigmaM4RotorI.wiring).expandtabs(4), "EnigmaM4RotorI"), 
+                    ("II\t({})".format(EnigmaM4RotorII.wiring).expandtabs(4), "EnigmaM4RotorII"), 
+                    ("III\t({})".format(EnigmaM4RotorIII.wiring).expandtabs(4), "EnigmaM4RotorIII"),
+                    ("IV\t({})".format(EnigmaM4RotorIV.wiring).expandtabs(4), "EnigmaM4RotorIV"), 
+                    ("V\t({})".format(EnigmaM4RotorV.wiring).expandtabs(4), "EnigmaM4RotorV"), 
+                    ("VI\t({})".format(EnigmaM4RotorVI.wiring).expandtabs(4), "EnigmaM4RotorVI"),
+                    ("VII\t({})".format(EnigmaM4RotorVII.wiring).expandtabs(4), "EnigmaM4RotorVII"), 
+                    ("VIII\t({})".format(EnigmaM4RotorVIII.wiring).expandtabs(4), "EnigmaM4RotorVIII")]
                 
                 self.rotor0_type_select.set_options(m4_rotors_options)
                 self.rotor0_position_select.set_options([(str(i), str(i)) for i in range(26)])
@@ -367,16 +367,16 @@ class ConfigureScreen(Screen):
                 self.rotor2_ring_select.value = "0"
 
                 self.rotor3_type_select.set_options([
-                    ("Beta\t({})".format(EnigmaM4RotorBeta.wiring), "EnigmaM4RotorBeta"),
-                    ("Gamma\t({})".format(EnigmaM4RotorGamma.wiring), "EnigmaM4RotorGamma")])
+                    ("Beta\t({})".format(EnigmaM4RotorBeta.wiring).expandtabs(4), "EnigmaM4RotorBeta"),
+                    ("Gamma\t({})".format(EnigmaM4RotorGamma.wiring).expandtabs(4), "EnigmaM4RotorGamma")])
                 self.rotor3_position_select.set_options([(str(i), str(i)) for i in range(26)])
                 self.rotor3_position_select.value = "0"
                 self.rotor3_ring_select.set_options([(str(i), str(i)) for i in range(26)])
                 self.rotor3_ring_select.value = "0"
 
                 self.reflector_type_select.set_options([
-                    ("UKW-B Thin\t({})".format(ReflectorUKWBThin.wiring), "ReflectorUKWBThin"), 
-                    ("UKW-C Thin\t({})".format(ReflectorUKWCThin.wiring), "ReflectorUKWCThin")])
+                    ("UKW-B Thin\t({})".format(ReflectorUKWBThin.wiring).expandtabs(4), "ReflectorUKWBThin"), 
+                    ("UKW-C Thin\t({})".format(ReflectorUKWCThin.wiring).expandtabs(4), "ReflectorUKWCThin")])
                 self.reflector_type_select.value = "ReflectorUKWBThin"
                 self.reflector_type_select.allow_blank=False
             elif event.value == "EnigmaZ30MarkI":
