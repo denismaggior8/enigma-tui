@@ -5,10 +5,12 @@ from enigmatui.data.enigma_config import EnigmaConfig
 class PlugboardInput(Input):
 
     async def on_input_changed(self, event: Input.Changed) -> None:
+        event.value = event.value.lower()  # Convert input to lowercase
         """Sanitize input to allow only letters."""
         sanitized_value = "".join(c for c in event.value if c.isalpha() or c.isspace() or event.key == "backspace")
         if sanitized_value != event.value:
-            event.input.value = sanitized_value  # Replace with sanitized input
+            event.input.value = sanitized_value  # Replace with sanitized input, lowercased
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
