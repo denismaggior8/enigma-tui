@@ -283,7 +283,7 @@ class ConfigureScreen(Screen):
 
                
 
-                self.etw_type_select.set_options([("Passthrough\t({})".format(EtwPassthrough.wiring), "EtwPassthrough")]) 
+                self.etw_type_select.set_options([("Passthrough\t({})".format(EtwPassthrough.wiring).expandtabs(4), "EtwPassthrough")]) 
                 self.etw_type_select.value="EtwPassthrough"
 
                 self.query_one("#plugboard_vertical", Vertical).remove_class("invisible")
