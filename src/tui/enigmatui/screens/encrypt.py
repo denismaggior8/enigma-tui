@@ -59,8 +59,17 @@ class EncryptScreen(Screen,Observer):
         if event.text_area.id == "cleartext" and event.text_area.text != 'Type your cleartext here...' and event.text_area.text != "":
             if self.query_one("#ciphertext", TextArea).text == "Read your ciphertext here...":
                self.query_one("#ciphertext", TextArea).clear()
-            self.query_one("#ciphertext", TextArea).text = self.query_one("#ciphertext", TextArea).text + self.enigma_config.enigma.input_char(event.text_area.text[-1])
-            self.update(self.enigma_config, None, None)
+            
+            # Copy and paste working
+            self.query_one("#ciphertext", TextArea).text = ""
+            self.enigma_config.reset_enigma()
+            for index, char in enumerate(event.text_area.text):
+                self.query_one("#ciphertext", TextArea).text += self.enigma_config.enigma.input_char(char)
+                self.update(self.enigma_config, None, None)
+            
+             # Copy and paste NOT working
+            #self.query_one("#ciphertext", TextArea).text = self.query_one("#ciphertext", TextArea).text + self.enigma_config.enigma.input_char(event.text_area.text[-1])
+            #self.update(self.enigma_config, None, None)
 
     def on_mount(self):
        self.enigma_config.add_observer(self)
