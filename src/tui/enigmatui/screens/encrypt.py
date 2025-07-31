@@ -63,14 +63,23 @@ class EncryptScreen(Screen,Observer):
 
     def on_text_area_changed(self, event: TextArea.Changed) -> None:
         if event.text_area.id == "cleartext" and event.text_area.text != 'Type your cleartext here...' and event.text_area.text != "":
+            # Save cleartext area (after the update)
             cleartext_area = event.text_area
+            # Query the ciphertext area to update
             ciphertext_area = self.query_one("#ciphertext", TextArea)
+            # Get the current cleartext area text (yet to be cleared)
             current_text = event.text_area.text
+            # Get the previous cleartext area text (as it was before the update)
             prev_text = self._prev_cleartext_area_text
-            cleartext_area.text = re.sub(f"[^{''.join(self.enigma_config.enigma.alphabet_list)}]", "", event.text_area.text)
+            # Remove from the cleartext area any character not in the alphabet list
+            cleartext_area.text = re.sub(f"[^{''.join(self.enigma_config.enigma.alphabet_list)}]", "", current_text)
+            # Update the _prev_cleartext_area_text with the update and cleared text
             self._prev_cleartext_area_text = cleartext_area.text
+            # Set the cursor position to the end of the cleartext area
             cleartext_area.cursor_location = (len(cleartext_area.text.splitlines()) - 1, len(cleartext_area.text.splitlines()[-1]))
+            # Append to the ciphertext area the just recently typed text (delta)
             ciphertext_area.text += self.enigma_config.enigma.input_string(cleartext_area.text[len(prev_text):])
+            # Let the observers know that the enigma machine has changed
             self.update(self.enigma_config, None, None)
 
         
