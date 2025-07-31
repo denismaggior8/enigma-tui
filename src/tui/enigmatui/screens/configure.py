@@ -290,13 +290,13 @@ class ConfigureScreen(Screen):
                 self.plugboard_input.add_class("active")
 
                 m3_rotors_options = [
-                    ("I\t({})".format(EnigmaM3RotorI.wiring).expandtabs(4), "EnigmaM3RotorI"), 
-                    ("II\t({})".format(EnigmaM3RotorII.wiring).expandtabs(4), "EnigmaM3RotorII"), 
-                    ("III\t({})".format(EnigmaM3RotorIII.wiring).expandtabs(4), "EnigmaM3RotorIII"),
-                    ("IV\t({})".format(EnigmaM3RotorIV.wiring).expandtabs(4), "EnigmaM3RotorIV"), 
-                    ("V\t({})".format(EnigmaM3RotorV.wiring).expandtabs(4), "EnigmaM3RotorV"), 
-                    ("VI\t({})".format(EnigmaM3RotorVI.wiring).expandtabs(4), "EnigmaM3RotorVI"),
-                    ("VII\t({})".format(EnigmaM3RotorVII.wiring).expandtabs(4), "EnigmaM3RotorVII"), 
+                    ("I\t\t({})".format(EnigmaM3RotorI.wiring).expandtabs(4), "EnigmaM3RotorI"), 
+                    ("II\t\t({})".format(EnigmaM3RotorII.wiring).expandtabs(4), "EnigmaM3RotorII"), 
+                    ("III\t\t({})".format(EnigmaM3RotorIII.wiring).expandtabs(4), "EnigmaM3RotorIII"),
+                    ("IV\t\t({})".format(EnigmaM3RotorIV.wiring).expandtabs(4), "EnigmaM3RotorIV"), 
+                    ("V\t\t({})".format(EnigmaM3RotorV.wiring).expandtabs(4), "EnigmaM3RotorV"), 
+                    ("VI\t\t({})".format(EnigmaM3RotorVI.wiring).expandtabs(4), "EnigmaM3RotorVI"),
+                    ("VII\t\t({})".format(EnigmaM3RotorVII.wiring).expandtabs(4), "EnigmaM3RotorVII"), 
                     ("VIII\t({})".format(EnigmaM3RotorVIII.wiring).expandtabs(4), "EnigmaM3RotorVIII")]
                 
                 self.rotor0_type_select.set_options(m3_rotors_options)
@@ -339,14 +339,14 @@ class ConfigureScreen(Screen):
                 self.etw_type_select.value="EtwPassthrough"
 
                 m4_rotors_options = [
-                    ("I\t({})".format(EnigmaM4RotorI.wiring).expandtabs(4), "EnigmaM4RotorI"), 
-                    ("II\t({})".format(EnigmaM4RotorII.wiring).expandtabs(4), "EnigmaM4RotorII"), 
-                    ("III\t({})".format(EnigmaM4RotorIII.wiring).expandtabs(4), "EnigmaM4RotorIII"),
-                    ("IV\t({})".format(EnigmaM4RotorIV.wiring).expandtabs(4), "EnigmaM4RotorIV"), 
-                    ("V\t({})".format(EnigmaM4RotorV.wiring).expandtabs(4), "EnigmaM4RotorV"), 
-                    ("VI\t({})".format(EnigmaM4RotorVI.wiring).expandtabs(4), "EnigmaM4RotorVI"),
-                    ("VII\t({})".format(EnigmaM4RotorVII.wiring).expandtabs(4), "EnigmaM4RotorVII"), 
-                    ("VIII\t({})".format(EnigmaM4RotorVIII.wiring).expandtabs(4), "EnigmaM4RotorVIII")]
+                    ("I\t\t({})".format(EnigmaM4RotorI.wiring).expandtabs(4), "EnigmaM4RotorI"), 
+                    ("II\t\t({})".format(EnigmaM4RotorII.wiring).expandtabs(4), "EnigmaM4RotorII"), 
+                    ("III\t\t({})".format(EnigmaM4RotorIII.wiring).expandtabs(4), "EnigmaM4RotorIII"),
+                    ("IV\t\t({})".format(EnigmaM4RotorIV.wiring).expandtabs(4), "EnigmaM4RotorIV"), 
+                    ("V\t\t({})".format(EnigmaM4RotorV.wiring).expandtabs(4), "EnigmaM4RotorV"), 
+                    ("VI\t\t({})".format(EnigmaM4RotorVI.wiring).expandtabs(4), "EnigmaM4RotorVI"),
+                    ("VII\t\t({})".format(EnigmaM4RotorVII.wiring).expandtabs(4), "EnigmaM4RotorVII"), 
+                    ("VIII\t\t({})".format(EnigmaM4RotorVIII.wiring).expandtabs(4), "EnigmaM4RotorVIII")]
                 
                 self.rotor0_type_select.set_options(m4_rotors_options)
                 self.rotor0_position_select.set_options([(str(i), str(i)) for i in range(26)])

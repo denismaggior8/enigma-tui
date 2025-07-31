@@ -1,9 +1,18 @@
 from setuptools import setup, find_packages
 from pathlib import Path
+import os
+import re
 
 
 this_directory = Path(__file__).parent
 long_description = (this_directory/".."/".."/"README.md").read_text()
+
+def read_version():
+    with open(os.path.join("enigmatui", "__init__.py")) as f:
+        match = re.search(r'__version__\s*=\s*[\'"]([^\'"]+)[\'"]', f.read())
+        if match:
+            return match.group(1)
+        raise RuntimeError("Unable to find version string.")
 
 
 setup(
@@ -12,7 +21,7 @@ setup(
     long_description_content_type='text/markdown',
     url="https://github.com/denismaggior8/enigma-tui",
     name="enigmatui",
-    version="1.1.1",
+    version=read_version(),  # Use a function to read the version from __init__.py
     include_package_data=True,
     packages=find_packages(
         # All keyword arguments below are optional:
