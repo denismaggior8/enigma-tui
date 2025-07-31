@@ -2,6 +2,8 @@ from textual.widgets import TextArea
 from textual import events
 from enigmatui.data.enigma_config import EnigmaConfig
 
+import re
+
 class UndeletableTextArea(TextArea):
 
     enigma_config = EnigmaConfig()
@@ -16,4 +18,3 @@ class UndeletableTextArea(TextArea):
             event.prevent_default()
         else:
            super()._on_key(event)
-            

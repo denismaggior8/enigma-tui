@@ -89,7 +89,8 @@ EncryptScreen #enigma-diagram-vertical {
     content-align-horizontal: left;
     margin-top: 1;
     height: 200;
-    width: 170
+    /* width: 170*/
+    
 }
 
 EncryptScreen #enigma-wirings-vertical {
@@ -97,7 +98,8 @@ EncryptScreen #enigma-wirings-vertical {
     margin-top: 0;
     margin-right: 1;
     height: 200;
-    width: 40
+    /*width: 40*/
+    
 }
 
 EncryptScreen #enigma-diagram-wirings-horizontal {

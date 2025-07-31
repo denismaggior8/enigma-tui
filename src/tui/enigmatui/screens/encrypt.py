@@ -1,14 +1,19 @@
 from textual.app import App, ComposeResult
 from textual.screen import Screen
 from textual.widgets import Static, Header, Footer, TextArea
-from enigmapython.XRay import XRay
+from textual.events import Paste
 from textual.containers import Container, Horizontal, Vertical
 
 from enigmatui.utility.observer import Observer
 from enigmatui.widgets.undeletable_textarea import UndeletableTextArea
 from enigmatui.data.enigma_config import EnigmaConfig
+from enigmapython.XRay import XRay
+
+import re
 
 class EncryptScreen(Screen,Observer):
+
+    _prev_cleartext_area_text = ""
 
     BINDINGS = [("ctrl+r", "reset", "Reset Enigma"),
                 ("escape", "back", "Back")]
@@ -19,6 +24,7 @@ class EncryptScreen(Screen,Observer):
         self.query_one("#cleartext", TextArea).clear()
         self.query_one("#ciphertext", TextArea).clear()
         self.update(None,None,None)
+        self._prev_cleartext_area_text = ""
 
     def action_back(self):
         self.app.pop_screen()    
@@ -57,39 +63,29 @@ class EncryptScreen(Screen,Observer):
 
     def on_text_area_changed(self, event: TextArea.Changed) -> None:
         if event.text_area.id == "cleartext" and event.text_area.text != 'Type your cleartext here...' and event.text_area.text != "":
-            if self.query_one("#ciphertext", TextArea).text == "Read your ciphertext here...":
-               self.query_one("#ciphertext", TextArea).clear()
+            cleartext_area = event.text_area
+            ciphertext_area = self.query_one("#ciphertext", TextArea)
+            current_text = event.text_area.text
+            prev_text = self._prev_cleartext_area_text
+            cleartext_area.text = re.sub(f"[^{''.join(self.enigma_config.enigma.alphabet_list)}]", "", event.text_area.text)
+            self._prev_cleartext_area_text = cleartext_area.text
+            cleartext_area.cursor_location = (len(cleartext_area.text.splitlines()) - 1, len(cleartext_area.text.splitlines()[-1]))
+            ciphertext_area.text += self.enigma_config.enigma.input_string(cleartext_area.text[len(prev_text):])
+            self.update(self.enigma_config, None, None)
 
-            # Copy and paste NOT working
-            #self.query_one("#ciphertext", TextArea).text = self.query_one("#ciphertext", TextArea).text + self.enigma_config.enigma.input_char(event.text_area.text[-1])
-            #self.update(self.enigma_config, None, None)
-            
-            # Copy and paste working
-            self.query_one("#ciphertext", TextArea).text = ""
-            self.enigma_config.reset_enigma()
-            for index, char in enumerate(event.text_area.text):
-                if char in self.enigma_config.enigma.alphabet_list:
-                    self.query_one("#ciphertext", TextArea).text += self.enigma_config.enigma.input_char(char)
-                    self.update(self.enigma_config, None, None)
-                else:
-                    self.query_one("#cleartext", TextArea).text = event.text_area.text.replace(char, "")
-       
-        # Set cursor position to the end of the text area
-        event.text_area.cursor_position = len(event.text_area.text)
+        
 
-       
-            
-            
+
 
     def on_mount(self):
        self.enigma_config.add_observer(self)
        self.query_one("#enigma-diagram",Static).update(XRay.render_enigma_xray(self.enigma_config.enigma))
-       self.query_one("#enigma-wirings",Static).update("Plugboard ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.plugboard).__name__,self.enigma_config.enigma.plugboard)+"ETW ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.etw).__name__,self.enigma_config.enigma.etw)+"\n".join(["Rotor {} ({}) wiring:\n{}\n".format(i,type(self.enigma_config.enigma.rotors[i]).__name__,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector ({}) wiring: {}\n".format(type(self.enigma_config.enigma.reflector).__name__,self.enigma_config.enigma.reflector))
+       self.query_one("#enigma-wirings",Static).update("Plugboard ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.plugboard).__name__,self.enigma_config.enigma.plugboard)+"ETW ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.etw).__name__,self.enigma_config.enigma.etw)+"\n".join(["Rotor {} ({}) wiring:\n{}\n".format(i,type(self.enigma_config.enigma.rotors[i]).__name__,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector ({}) wiring:\n{}\n".format(type(self.enigma_config.enigma.reflector).__name__,self.enigma_config.enigma.reflector))
 
 
     def update(self, observable, *args, **kwargs):
         self.query_one("#enigma-diagram",Static).update(XRay.render_enigma_xray(self.enigma_config.enigma))
-        self.query_one("#enigma-wirings",Static).update("Plugboard ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.plugboard).__name__,self.enigma_config.enigma.plugboard)+"ETW ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.etw).__name__,self.enigma_config.enigma.etw)+"\n".join(["Rotor {} ({}) wiring:\n{}\n".format(i,type(self.enigma_config.enigma.rotors[i]).__name__,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector ({}) wiring: {}\n".format(type(self.enigma_config.enigma.reflector).__name__,self.enigma_config.enigma.reflector))
+        self.query_one("#enigma-wirings",Static).update("Plugboard ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.plugboard).__name__,self.enigma_config.enigma.plugboard)+"ETW ({}) wiring: \n{}\n\n".format(type(self.enigma_config.enigma.etw).__name__,self.enigma_config.enigma.etw)+"\n".join(["Rotor {} ({}) wiring:\n{}\n".format(i,type(self.enigma_config.enigma.rotors[i]).__name__,self.enigma_config.enigma.rotors[i]) for i in range(len(self.enigma_config.enigma.rotors))])+"\nReflector ({}) wiring:\n{}\n".format(type(self.enigma_config.enigma.reflector).__name__,self.enigma_config.enigma.reflector))
     
     #def on_screen_resume(self) -> None:
     #    self.query_one("#ciphertext", TextArea).clear()
