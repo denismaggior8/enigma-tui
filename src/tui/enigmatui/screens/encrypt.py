@@ -1,6 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.screen import Screen
-from textual.widgets import Static, Header, Footer, TextArea
+from textual.widgets import Static, Header, Footer, TextArea, Button
 from textual.events import Paste
 from textual.containers import Container, Horizontal, Vertical
 
@@ -8,6 +8,7 @@ from enigmatui.utility.observer import Observer
 from enigmatui.widgets.undeletable_textarea import UndeletableTextArea
 from enigmatui.data.enigma_config import EnigmaConfig
 from enigmapython.XRay import XRay
+import pyperclip
 
 import re
 
@@ -44,18 +45,21 @@ class EncryptScreen(Screen,Observer):
         )
         yield Vertical(
             Horizontal(
-                Static("Cleartext:", id="cleartext-label"),
+                Static("Cleartext:", id="cleartext-label")
             ),
             Horizontal(
-                UndeletableTextArea(id="cleartext")
+                UndeletableTextArea(id="cleartext"),
+                Button("Copy", id="cleartext_copy"),
+                Button("Paste", id="cleartext_paste")
             ),
             Static(""),
             Static(""),
             Horizontal(
-                Static("Ciphertext:", id="ciphertext-label"),
+                Static("Ciphertext:", id="ciphertext-label")
             ),
             Horizontal(
-                UndeletableTextArea(id="ciphertext", read_only=True)
+                UndeletableTextArea(id="ciphertext", read_only=True),
+                Button("Copy", id="ciphertext_copy")
             )
         )
         
@@ -79,11 +83,22 @@ class EncryptScreen(Screen,Observer):
             cleartext_area.cursor_location = (len(cleartext_area.text.splitlines()) - 1, len(cleartext_area.text.splitlines()[-1]))
             # Append to the ciphertext area the just recently typed text (delta)
             ciphertext_area.text += self.enigma_config.enigma.input_string(cleartext_area.text[len(prev_text):])
-            # Let the observers know that the enigma machine has changed
+            # Let the observers know that the enigma machine state has changed
             self.update(self.enigma_config, None, None)
 
         
-
+    async def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "cleartext_copy":
+            cleartext_area = self.query_one("#cleartext", TextArea)
+            pyperclip.copy(cleartext_area.text)
+        elif event.button.id == "cleartext_paste":
+            paste_text =  pyperclip.paste()
+            cleaned = re.sub(f"[^{''.join(self.enigma_config.enigma.alphabet_list)}]", "", paste_text)
+            cleartext_area = self.query_one("#cleartext", TextArea)
+            cleartext_area.text  = cleaned
+        elif event.button.id == "ciphertext_copy":
+            ciphertext_area = self.query_one("#ciphertext", TextArea)
+            pyperclip.copy(ciphertext_area.text)
 
 
     def on_mount(self):
