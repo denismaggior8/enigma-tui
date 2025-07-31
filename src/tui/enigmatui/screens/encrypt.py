@@ -95,7 +95,7 @@ class EncryptScreen(Screen,Observer):
             paste_text =  pyperclip.paste()
             cleaned = re.sub(f"[^{''.join(self.enigma_config.enigma.alphabet_list)}]", "", paste_text)
             cleartext_area = self.query_one("#cleartext", TextArea)
-            cleartext_area.text  = cleaned
+            cleartext_area.text  += cleaned
         elif event.button.id == "ciphertext_copy":
             ciphertext_area = self.query_one("#ciphertext", TextArea)
             pyperclip.copy(ciphertext_area.text)
